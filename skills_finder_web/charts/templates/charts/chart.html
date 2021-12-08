@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+
+{% load static %}
+
+{% block title %}
+    <title>Skills finder!</title>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div>
+    <canvas id="skill_per_job_category_chart"></canvas>
+</div>
+<script>
+const ctx = document.getElementById('skill_per_job_category_chart').getContext('2d');
+const skill_per_job_category_chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for row in skill_per_job_category %}'{{row.skill}}',{% endfor %}],
+        datasets: [{
+            label: 'The frequency of skills occurrence per job offer',
+            data: [{% for row in skill_per_job_category %}{{row.amount}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+const options = {
+   tooltips: {
+     enabled: false
+   },
+   plugins: {
+     datalabels: {
+       formatter: (value, ctx) => {
+         let datasets = ctx.chart.data.datasets;
+         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+           let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+           let percentage = Math.round((value / sum) * 100) + '%';
+           return percentage;
+         } else {
+           return percentage;
+         }
+       },
+       color: '#fff',
+     }
+   }
+ };
+</script>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Skills finder!</title>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'jobs/js/job_category_handler.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'jobs/styles/jobs-categories-page-header.css' %}"/>
+<link rel="stylesheet" href="{% static 'jobs/styles/drop-down-list.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h5>Find out what skills are most desired by IT recruiters!</h5>
+</div>
+
+<div class="content">
+    <div class="select">
+        <select id="selected_job_category">
+            {% for job_category in jobs_categories %}
+            <option selected="selected">{{ job_category }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button class="see-button" onclick="redirectToCorrectChartByChosenJobCategory()">See</button>
+</div>
+{% endblock %}

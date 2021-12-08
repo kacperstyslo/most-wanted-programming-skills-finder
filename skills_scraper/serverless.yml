@@ -1,0 +1,19 @@
+service: skills_scraper
+
+provider:
+  name: aws
+  runtime: python3.8
+  timeout: 180
+  lambdaHashingVersion: 20201221
+
+functions:
+  skills_finder:
+    handler: scrapy_launcher.invoke_lambda_handler
+
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    fileName: requirements.txt
+    dockerizePip: non-linux
+    slim: true

@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+    postgres:
+        image: postgres:12.5
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+        ports:
+            - "5432:5432"
+
+    webserver:
+        image: puckel/docker-airflow:1.10.9
+        depends_on:
+            - postgres
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Local
+            - AIRFLOW_CONN_POSTGRES_DEFAULT=postgres://airflow:airflow@postgres:5432/airflow
+            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+            - AWS_SHARED_CREDENTIALS_FILE=/usr/local/airflow/.aws/credentials
+        volumes:
+            - ./dags:/usr/local/airflow/dags
+            - ./requirements.txt:/requirements.txt
+            - ~/.aws:/usr/local/airflow/.aws/
+        ports:
+            - "8080:8080"
+        command: webserver
+        healthcheck:
+            test:
+                ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 5s
+            timeout: 30s
+            retries: 6
+        restart: always

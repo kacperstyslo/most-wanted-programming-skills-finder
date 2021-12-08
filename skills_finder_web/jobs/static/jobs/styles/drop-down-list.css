@@ -1,0 +1,28 @@
+.content {
+    width: 100%;
+}
+
+.select {
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    height: 3em;
+    border-radius: .25em;
+    overflow: hidden;
+}
+
+.see-button {
+    display: block;
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    font-weight: bold;
+    color: #34495e;
+    text-decoration: none;
+    padding: .25em;
+    border-radius: .25em;
+    background: white;
+}
