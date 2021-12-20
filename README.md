@@ -69,3 +69,15 @@ Application will be available on http://127.0.0.1:8000
 
 ### ETL data pipeline
 ![data_pipeline_top](https://user-images.githubusercontent.com/57534862/144881540-3e060653-b0d4-4176-bf1c-61633dd2838d.PNG)
+
+### Below charts are generated in "skill-finder-web" app
+
+#### Most wanted backend skills
+![backend-chart](https://user-images.githubusercontent.com/57534862/146748302-c8f426a6-cbc2-49a0-a3ed-163dcf0c5412.PNG)
+
+
+#### Most wanted big-data skills
+![big-data-chart](https://user-images.githubusercontent.com/57534862/146749177-d2830848-cdfa-4be2-8b30-356f6c7b99ac.PNG)
+
+
+
